@@ -1,0 +1,857 @@
+/* ==========================================================================
+   COMPONENT STYLESHEET - WEEKLY REPORT GENERATOR
+   Standard Vanilla CSS with responsive grid layouts, glassmorphism & controls
+   ========================================================================== */
+
+/* Main App Wrapper Container */
+.app-container {
+  max-width: 1280px; /* Maximum layout container width */
+  margin: 0 auto; /* Center layout horizontally on screen */
+  padding: 24px 20px 60px 20px; /* Padding spacing around layout */
+  min-height: 100vh; /* Minimum viewport height */
+  display: flex; /* Flexbox vertical layout container */
+  flex-direction: column; /* Stack children vertically */
+  gap: 28px; /* Vertical gap between app sections */
+  animation: fadeIn 0.4s ease-out; /* Smooth entry fade animation */
+}
+
+/* ==========================================================================
+   HEADER COMPONENT STYLES (.app-header)
+   ========================================================================== */
+.app-header {
+  display: flex; /* Horizontal alignment */
+  justify-content: space-between; /* Push logo left and actions right */
+  align-items: center; /* Center items vertically */
+  background: var(--surface-card); /* Translucent glass card background */
+  backdrop-filter: var(--glass-blur); /* Glass blur backdrop */
+  border: 1px solid var(--border-light); /* Subtle glass border */
+  border-radius: var(--radius-lg); /* Curved border corners */
+  padding: 20px 28px; /* Internal content padding */
+  box-shadow: var(--shadow-md); /* Soft drop shadow */
+  flex-wrap: wrap; /* Wrap on small screens */
+  gap: 16px; /* Gap between logo and button action */
+}
+
+/* Header Brand Section */
+.header-brand {
+  display: flex; /* Horizontal flex layout */
+  align-items: center; /* Align icon and text vertically */
+  gap: 14px; /* Gap between icon and title text */
+}
+
+/* Brand Icon Badge Container */
+.brand-icon {
+  width: 48px; /* Fixed width */
+  height: 48px; /* Fixed height */
+  border-radius: var(--radius-md); /* Curved box edges */
+  background: var(--accent-gradient); /* Rich vibrant gradient background */
+  display: flex; /* Center inner icon */
+  align-items: center; /* Vertical centering */
+  justify-content: center; /* Horizontal centering */
+  font-size: 24px; /* Icon size */
+  box-shadow: var(--shadow-glow); /* Glowing indigo halo shadow */
+}
+
+/* Brand Text Title & Subtitle */
+.brand-title {
+  font-size: 1.5rem; /* Header font size */
+  font-weight: 800; /* Extra bold text */
+  letter-spacing: -0.02em; /* Slightly tighter letter spacing */
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%); /* Subtle metallic text gradient */
+  -webkit-background-clip: text; /* Clip gradient to text shape */
+  -webkit-text-fill-color: transparent; /* Make default text color transparent */
+}
+
+.brand-subtitle {
+  font-size: 0.85rem; /* Subtitle font size */
+  color: var(--text-secondary); /* Muted slate text color */
+  font-weight: 500; /* Medium font weight */
+}
+
+/* Primary Hero Action Button */
+.btn-primary {
+  display: inline-flex; /* Inline flex for icon + text alignment */
+  align-items: center; /* Center icon and label vertically */
+  gap: 8px; /* Gap between icon and text label */
+  background: var(--accent-gradient); /* Gradient button background */
+  color: #ffffff; /* Crisp white button text */
+  border: none; /* Remove default border */
+  border-radius: var(--radius-full); /* Fully rounded pill shape */
+  padding: 12px 24px; /* Vertical and horizontal padding */
+  font-weight: 600; /* Semi-bold font weight */
+  font-size: 0.95rem; /* Button text size */
+  cursor: pointer; /* Change mouse cursor to pointer hand */
+  transition: var(--transition-normal); /* Smooth hover state transitions */
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35); /* Button drop shadow */
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px); /* Slight hover lift effect */
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5); /* Enhanced hover glow */
+  opacity: 0.95; /* Slight opacity feedback */
+}
+
+.btn-primary:active {
+  transform: translateY(0); /* Reset lift on button press */
+}
+
+/* Secondary Button Style */
+.btn-secondary {
+  display: inline-flex; /* Inline flex */
+  align-items: center; /* Center items vertically */
+  gap: 8px; /* Gap */
+  background: rgba(51, 65, 85, 0.6); /* Translucent slate background */
+  color: var(--text-primary); /* Primary text color */
+  border: 1px solid var(--border-light); /* Glass border */
+  border-radius: var(--radius-md); /* Radius corners */
+  padding: 10px 18px; /* Padding */
+  font-weight: 600; /* Font weight */
+  font-size: 0.9rem; /* Text size */
+  cursor: pointer; /* Cursor */
+  transition: var(--transition-fast); /* Quick transition */
+}
+
+.btn-secondary:hover {
+  background: rgba(71, 85, 105, 0.8); /* Darker hover background */
+  border-color: rgba(255, 255, 255, 0.2); /* Brighter border */
+}
+
+/* Danger Button Style */
+.btn-danger {
+  display: inline-flex; /* Inline flex */
+  align-items: center; /* Center items */
+  gap: 6px; /* Gap */
+  background: rgba(244, 63, 94, 0.15); /* Translucent rose red background */
+  color: var(--text-rose); /* Red text color */
+  border: 1px solid rgba(244, 63, 94, 0.3); /* Red border */
+  border-radius: var(--radius-md); /* Radius */
+  padding: 8px 14px; /* Padding */
+  font-weight: 600; /* Font weight */
+  font-size: 0.85rem; /* Text size */
+  cursor: pointer; /* Cursor */
+  transition: var(--transition-fast); /* Fast transition */
+}
+
+.btn-danger:hover {
+  background: rgba(244, 63, 94, 0.3); /* Darker red on hover */
+}
+
+/* ==========================================================================
+   STATS DASHBOARD COMPONENT (.stats-grid)
+   ========================================================================== */
+.stats-grid {
+  display: grid; /* Grid container layout */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Auto-responsive columns */
+  gap: 18px; /* Grid gap spacing */
+}
+
+/* Individual Stat Card */
+.stat-card {
+  background: var(--surface-card); /* Glass background */
+  backdrop-filter: var(--glass-blur); /* Glass blur */
+  border: 1px solid var(--border-light); /* Glass border */
+  border-radius: var(--radius-lg); /* Rounded corners */
+  padding: 20px 24px; /* Inner card padding */
+  display: flex; /* Flex alignment */
+  align-items: center; /* Vertical center alignment */
+  gap: 18px; /* Gap between icon box and text */
+  transition: var(--transition-normal); /* Transition on hover */
+  position: relative; /* Relative positioning for pseudo highlights */
+  overflow: hidden; /* Clip overflow highlights */
+}
+
+.stat-card:hover {
+  transform: translateY(-4px); /* Hover lift animation */
+  border-color: var(--border-highlight); /* Highlight border on hover */
+  box-shadow: var(--shadow-md); /* Elevated shadow */
+}
+
+/* Stat Icon Box */
+.stat-icon-box {
+  width: 52px; /* Fixed width */
+  height: 52px; /* Fixed height */
+  border-radius: var(--radius-md); /* Curved box */
+  display: flex; /* Flex center */
+  align-items: center; /* Center vertical */
+  justify-content: center; /* Center horizontal */
+  font-size: 22px; /* Icon size */
+}
+
+/* Icon Box Color Variants */
+.stat-icon-box.indigo {
+  background: rgba(99, 102, 241, 0.15); /* Soft indigo tint */
+  color: #818cf8; /* Light indigo icon color */
+  border: 1px solid rgba(99, 102, 241, 0.3); /* Border */
+}
+
+.stat-icon-box.emerald {
+  background: rgba(16, 185, 129, 0.15); /* Soft emerald tint */
+  color: #34d399; /* Light emerald icon color */
+  border: 1px solid rgba(16, 185, 129, 0.3); /* Border */
+}
+
+.stat-icon-box.rose {
+  background: rgba(244, 63, 94, 0.15); /* Soft rose red tint */
+  color: #fb7185; /* Light rose icon color */
+  border: 1px solid rgba(244, 63, 94, 0.3); /* Border */
+}
+
+.stat-icon-box.amber {
+  background: rgba(245, 158, 11, 0.15); /* Soft amber yellow tint */
+  color: #fbbf24; /* Light amber icon color */
+  border: 1px solid rgba(245, 158, 11, 0.3); /* Border */
+}
+
+/* Stat Text Content */
+.stat-value {
+  font-size: 1.8rem; /* Large numerical stat value */
+  font-weight: 800; /* Extra bold */
+  font-family: var(--font-heading); /* Display font family */
+  color: var(--text-primary); /* White text color */
+}
+
+.stat-label {
+  font-size: 0.85rem; /* Label text size */
+  color: var(--text-secondary); /* Slate muted color */
+  font-weight: 500; /* Medium weight */
+}
+
+/* ==========================================================================
+   FILTER TOOLBAR COMPONENT (.filter-toolbar)
+   ========================================================================== */
+.filter-toolbar {
+  background: var(--surface-card); /* Glass background */
+  backdrop-filter: var(--glass-blur); /* Glass blur */
+  border: 1px solid var(--border-light); /* Glass border */
+  border-radius: var(--radius-lg); /* Rounded corners */
+  padding: 16px 20px; /* Padding */
+  display: flex; /* Flex layout */
+  flex-wrap: wrap; /* Wrap on small screens */
+  gap: 16px; /* Gap between search and select inputs */
+  align-items: center; /* Vertical alignment */
+  justify-content: space-between; /* Space out items */
+}
+
+/* Search Input Box Container */
+.search-box {
+  display: flex; /* Horizontal flex */
+  align-items: center; /* Center items */
+  background: var(--surface-input); /* Input background */
+  border: 1px solid var(--border-light); /* Input border */
+  border-radius: var(--radius-md); /* Curved input edges */
+  padding: 8px 14px; /* Inner padding */
+  gap: 10px; /* Gap between search icon and text input */
+  flex: 1; /* Expand to fill available space */
+  min-width: 240px; /* Minimum width before wrapping */
+  transition: var(--transition-fast); /* Smooth focus transition */
+}
+
+.search-box:focus-within {
+  border-color: var(--border-highlight); /* Focus active border glow */
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.2); /* Glow shadow */
+}
+
+.search-box input {
+  background: transparent; /* Transparent background */
+  border: none; /* Remove default input border */
+  outline: none; /* Remove default focus outline */
+  color: var(--text-primary); /* White text color */
+  width: 100%; /* Full width */
+  font-size: 0.9rem; /* Input font size */
+}
+
+.search-box input::placeholder {
+  color: var(--text-muted); /* Muted placeholder text color */
+}
+
+/* Filter Select Dropdowns & Tabs Group */
+.filter-controls {
+  display: flex; /* Flex container */
+  align-items: center; /* Vertical centering */
+  gap: 12px; /* Gap between dropdowns */
+  flex-wrap: wrap; /* Wrap on smaller screens */
+}
+
+/* Select Dropdown Styling */
+.filter-select {
+  background: var(--surface-input); /* Input background */
+  color: var(--text-primary); /* White text color */
+  border: 1px solid var(--border-light); /* Input border */
+  border-radius: var(--radius-md); /* Rounded corners */
+  padding: 9px 14px; /* Vertical and horizontal padding */
+  font-size: 0.88rem; /* Font size */
+  outline: none; /* Remove focus outline */
+  cursor: pointer; /* Pointer cursor */
+  transition: var(--transition-fast); /* Fast hover transition */
+}
+
+.filter-select:focus {
+  border-color: var(--border-highlight); /* Active border */
+}
+
+.filter-select option {
+  background: #1e293b; /* Dark option dropdown background */
+  color: #f8fafc; /* White option text */
+}
+
+/* Status Filter Pill Tabs */
+.status-tabs {
+  display: flex; /* Horizontal flex container */
+  background: var(--surface-input); /* Input bar background */
+  padding: 4px; /* Outer tab pill padding */
+  border-radius: var(--radius-md); /* Pill corners */
+  border: 1px solid var(--border-light); /* Border */
+}
+
+.tab-btn {
+  background: transparent; /* Transparent resting background */
+  border: none; /* Remove border */
+  color: var(--text-secondary); /* Slate tab label text */
+  padding: 6px 14px; /* Inner tab button padding */
+  border-radius: var(--radius-sm); /* Tab corner radius */
+  font-size: 0.82rem; /* Tab font size */
+  font-weight: 600; /* Semi-bold label */
+  cursor: pointer; /* Pointer cursor */
+  transition: var(--transition-fast); /* Fast active transition */
+}
+
+.tab-btn.active {
+  background: var(--primary-600); /* Active selected tab background */
+  color: #ffffff; /* Active white text */
+  box-shadow: var(--shadow-sm); /* Active tab shadow */
+}
+
+/* ==========================================================================
+   REPORT CARDS GRID (.reports-grid)
+   ========================================================================== */
+.reports-grid {
+  display: grid; /* CSS Grid layout */
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); /* Responsive card columns */
+  gap: 22px; /* Grid gap spacing */
+}
+
+/* Individual Report Card */
+.report-card {
+  background: var(--surface-card); /* Glass background */
+  backdrop-filter: var(--glass-blur); /* Backdrop filter */
+  border: 1px solid var(--border-light); /* Card border */
+  border-radius: var(--radius-lg); /* Rounded corners */
+  padding: 22px; /* Inner card padding */
+  display: flex; /* Flexbox vertical column */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: space-between; /* Space content and card footer */
+  gap: 16px; /* Gap between internal sections */
+  transition: var(--transition-normal); /* Smooth hover transition */
+  box-shadow: var(--shadow-sm); /* Resting shadow */
+}
+
+.report-card:hover {
+  transform: translateY(-5px); /* Lift card up on hover */
+  border-color: rgba(99, 102, 241, 0.4); /* Highlight border color */
+  box-shadow: var(--shadow-glow); /* Glowing shadow effect */
+}
+
+/* Card Header (Title & Department Badge) */
+.card-header {
+  display: flex; /* Flex alignment */
+  justify-content: space-between; /* Push title left and badge right */
+  align-items: flex-start; /* Align top */
+  gap: 12px; /* Gap between title and badge */
+}
+
+.card-title {
+  font-size: 1.15rem; /* Title font size */
+  font-weight: 700; /* Bold title text */
+  color: var(--text-primary); /* White color */
+  line-height: 1.35; /* Tight line height */
+}
+
+/* Department Badge */
+.dept-badge {
+  font-size: 0.75rem; /* Small font size */
+  font-weight: 700; /* Bold weight */
+  padding: 4px 10px; /* Inner badge padding */
+  border-radius: var(--radius-full); /* Fully rounded pill */
+  text-transform: uppercase; /* Uppercase lettering */
+  letter-spacing: 0.05em; /* Tracked letters */
+  background: rgba(99, 102, 241, 0.15); /* Light indigo background */
+  color: #a5b4fc; /* Light indigo text */
+  border: 1px solid rgba(99, 102, 241, 0.3); /* Border */
+  white-space: nowrap; /* Prevent line breaks */
+}
+
+/* Author Info Meta Bar */
+.author-meta {
+  display: flex; /* Flex layout */
+  align-items: center; /* Center items vertically */
+  gap: 12px; /* Gap between avatar and metadata */
+}
+
+/* Author Avatar Circle */
+.author-avatar {
+  width: 38px; /* Fixed width */
+  height: 38px; /* Fixed height */
+  border-radius: 50%; /* Perfect circle */
+  background: var(--accent-gradient); /* Vibrant gradient */
+  color: #ffffff; /* White text */
+  display: flex; /* Flex center */
+  align-items: center; /* Vertical center */
+  justify-content: center; /* Horizontal center */
+  font-weight: 700; /* Bold initials */
+  font-size: 0.9rem; /* Initial font size */
+}
+
+.author-name {
+  font-size: 0.92rem; /* Author name size */
+  font-weight: 600; /* Semi-bold */
+  color: var(--text-primary); /* Primary text */
+}
+
+.author-role {
+  font-size: 0.78rem; /* Role text size */
+  color: var(--text-secondary); /* Slate muted color */
+}
+
+/* Productivity Rating Stars */
+.rating-stars {
+  display: flex; /* Horizontal star row */
+  gap: 3px; /* Gap between star icons */
+  color: #f59e0b; /* Yellow star color */
+  font-size: 0.9rem; /* Star icon size */
+}
+
+.star-empty {
+  color: rgba(255, 255, 255, 0.15); /* Dim empty star color */
+}
+
+/* Task Summary Counters inside Card Body */
+.task-summary-list {
+  display: flex; /* Vertical flex list */
+  flex-direction: column; /* Stack rows */
+  gap: 8px; /* Gap between item summary rows */
+  background: rgba(15, 23, 42, 0.4); /* Inner dark container box */
+  padding: 12px 14px; /* Inner padding */
+  border-radius: var(--radius-md); /* Curved box corners */
+  border: 1px solid rgba(255, 255, 255, 0.04); /* Subtle border */
+}
+
+.task-summary-row {
+  display: flex; /* Horizontal flex row */
+  align-items: center; /* Align items vertically */
+  justify-content: space-between; /* Space title and counter badge */
+  font-size: 0.84rem; /* Text size */
+}
+
+.summary-label {
+  color: var(--text-secondary); /* Label text color */
+  display: flex; /* Align bullet icon with label */
+  align-items: center; /* Vertical centering */
+  gap: 6px; /* Bullet gap */
+}
+
+.summary-count {
+  font-weight: 700; /* Bold numeric counter */
+  font-size: 0.8rem; /* Counter size */
+  padding: 2px 8px; /* Pill padding */
+  border-radius: var(--radius-full); /* Round pill */
+}
+
+.summary-count.emerald {
+  background: rgba(16, 185, 129, 0.2); /* Emerald background */
+  color: var(--text-emerald); /* Green text */
+}
+
+.summary-count.amber {
+  background: rgba(245, 158, 11, 0.2); /* Amber background */
+  color: var(--text-amber); /* Yellow text */
+}
+
+.summary-count.rose {
+  background: rgba(244, 63, 94, 0.2); /* Rose background */
+  color: var(--text-rose); /* Red text */
+}
+
+/* Status Badge Component */
+.status-pill {
+  font-size: 0.75rem; /* Text size */
+  font-weight: 700; /* Bold */
+  padding: 4px 12px; /* Padding */
+  border-radius: var(--radius-full); /* Fully rounded pill */
+  display: inline-flex; /* Inline flex */
+  align-items: center; /* Align bullet dot with text */
+  gap: 6px; /* Bullet dot spacing */
+}
+
+.status-pill.submitted {
+  background: rgba(99, 102, 241, 0.2); /* Indigo tint */
+  color: #a5b4fc; /* Indigo text */
+  border: 1px solid rgba(99, 102, 241, 0.3); /* Indigo border */
+}
+
+.status-pill.approved {
+  background: rgba(16, 185, 129, 0.2); /* Green tint */
+  color: #34d399; /* Green text */
+  border: 1px solid rgba(16, 185, 129, 0.3); /* Green border */
+}
+
+.status-pill.draft {
+  background: rgba(148, 163, 184, 0.2); /* Slate tint */
+  color: #cbd5e1; /* Slate text */
+  border: 1px solid rgba(148, 163, 184, 0.3); /* Slate border */
+}
+
+/* Card Actions Footer Toolbar */
+.card-actions {
+  display: flex; /* Horizontal flex toolbar */
+  align-items: center; /* Center actions vertically */
+  justify-content: space-between; /* Space out primary view action and secondary edit/delete buttons */
+  padding-top: 12px; /* Top border separation padding */
+  border-top: 1px solid var(--border-light); /* Separator line */
+}
+
+.action-btn-group {
+  display: flex; /* Action button group flex */
+  align-items: center; /* Center items */
+  gap: 8px; /* Gap between edit and delete buttons */
+}
+
+.btn-icon {
+  background: transparent; /* Transparent icon button */
+  border: none; /* No border */
+  color: var(--text-secondary); /* Icon color */
+  padding: 6px; /* Icon padding */
+  border-radius: var(--radius-sm); /* Corner radius */
+  cursor: pointer; /* Pointer cursor */
+  transition: var(--transition-fast); /* Fast transition */
+  display: flex; /* Flex center */
+  align-items: center; /* Vertical center */
+  justify-content: center; /* Horizontal center */
+}
+
+.btn-icon:hover {
+  background: rgba(255, 255, 255, 0.1); /* Light background highlight */
+  color: var(--text-primary); /* White text on hover */
+}
+
+.btn-icon.delete:hover {
+  background: rgba(244, 63, 94, 0.2); /* Red background on delete hover */
+  color: var(--text-rose); /* Red text color */
+}
+
+/* ==========================================================================
+   MODAL WINDOW & FORM STYLES (.modal-overlay, .modal-container)
+   ========================================================================== */
+.modal-overlay {
+  position: fixed; /* Fixed position spanning full screen viewport */
+  top: 0; /* Top anchor */
+  left: 0; /* Left anchor */
+  right: 0; /* Right anchor */
+  bottom: 0; /* Bottom anchor */
+  background: rgba(15, 23, 42, 0.75); /* Dark translucent overlay backdrop */
+  backdrop-filter: blur(8px); /* Backdrop blur intensity */
+  display: flex; /* Flexbox centering container */
+  align-items: center; /* Vertical center alignment */
+  justify-content: center; /* Horizontal center alignment */
+  z-index: 1000; /* High z-index layer above page content */
+  padding: 20px; /* Padding spacing */
+  animation: fadeIn 0.25s ease-out; /* Fade-in entry animation */
+}
+
+.modal-container {
+  background: #1e293b; /* Solid slate modal card background */
+  border: 1px solid var(--border-light); /* Glass border */
+  border-radius: var(--radius-lg); /* Rounded corners */
+  width: 100%; /* Responsive width */
+  max-width: 680px; /* Maximum modal width constraint */
+  max-height: 90vh; /* Maximum height bound */
+  display: flex; /* Flex vertical layout */
+  flex-direction: column; /* Column direction */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); /* Deep modal drop shadow */
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); /* Slide-up entry animation */
+  overflow: hidden; /* Clip inner overflow */
+}
+
+/* Modal Header Bar */
+.modal-header {
+  padding: 20px 24px; /* Internal header padding */
+  display: flex; /* Horizontal flex header */
+  align-items: center; /* Center title and close button vertically */
+  justify-content: space-between; /* Space out title and close button */
+  border-bottom: 1px solid var(--border-light); /* Bottom boundary line */
+}
+
+.modal-title {
+  font-size: 1.25rem; /* Modal title font size */
+  font-weight: 700; /* Bold title */
+  color: var(--text-primary); /* White text color */
+}
+
+.btn-close {
+  background: transparent; /* Transparent button background */
+  border: none; /* Remove default border */
+  color: var(--text-secondary); /* Muted slate close icon color */
+  font-size: 1.5rem; /* Large close cross symbol */
+  line-height: 1; /* Tight line height */
+  cursor: pointer; /* Pointer hand cursor */
+  padding: 4px 8px; /* Padding */
+  border-radius: var(--radius-sm); /* Curved edges */
+  transition: var(--transition-fast); /* Fast transition */
+}
+
+.btn-close:hover {
+  background: rgba(255, 255, 255, 0.1); /* Highlight on hover */
+  color: var(--text-primary); /* White color */
+}
+
+/* Modal Scrollable Content Body */
+.modal-body {
+  padding: 24px; /* Body padding */
+  overflow-y: auto; /* Enable vertical scrolling for long forms */
+  display: flex; /* Flex column layout */
+  flex-direction: column; /* Vertical stacking */
+  gap: 20px; /* Gap between form field groups */
+}
+
+/* Form Group Grid Rows */
+.form-row {
+  display: grid; /* Grid container */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Auto-responsive columns */
+  gap: 16px; /* Gap between field controls */
+}
+
+.form-group {
+  display: flex; /* Vertical flex column */
+  flex-direction: column; /* Stack label above field */
+  gap: 6px; /* Gap between label and input control */
+}
+
+.form-label {
+  font-size: 0.85rem; /* Label font size */
+  font-weight: 600; /* Semi-bold weight */
+  color: var(--text-secondary); /* Slate label text color */
+}
+
+.form-input, .form-select, .form-textarea {
+  background: var(--surface-input); /* Form field dark background */
+  border: 1px solid var(--border-light); /* Form field border */
+  border-radius: var(--radius-md); /* Curved input corners */
+  padding: 10px 14px; /* Inner padding */
+  color: var(--text-primary); /* Crisp white text color */
+  font-size: 0.9rem; /* Input font size */
+  outline: none; /* Remove focus outline */
+  transition: var(--transition-fast); /* Fast transition */
+  width: 100%; /* Full width control */
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--border-highlight); /* Highlight border on input focus */
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.2); /* Input glow shadow */
+}
+
+.form-textarea {
+  resize: vertical; /* Allow vertical resizing only */
+  min-height: 80px; /* Minimum textarea height */
+}
+
+/* Dynamic Multi-Item Task Builder Section */
+.task-builder-section {
+  display: flex; /* Vertical column flex */
+  flex-direction: column; /* Stack header and input controls */
+  gap: 10px; /* Section item gap */
+}
+
+.task-input-row {
+  display: flex; /* Horizontal flex container */
+  gap: 10px; /* Gap between item text input and add button */
+}
+
+.btn-add-item {
+  background: rgba(99, 102, 241, 0.2); /* Indigo tint button */
+  color: #a5b4fc; /* Indigo label text */
+  border: 1px solid rgba(99, 102, 241, 0.4); /* Border */
+  border-radius: var(--radius-md); /* Rounded corners */
+  padding: 0 16px; /* Horizontal padding */
+  font-weight: 600; /* Semi-bold label */
+  font-size: 0.88rem; /* Font size */
+  cursor: pointer; /* Pointer cursor */
+  white-space: nowrap; /* Keep text on one line */
+  transition: var(--transition-fast); /* Transition */
+}
+
+.btn-add-item:hover {
+  background: var(--primary-600); /* Darker indigo on hover */
+  color: #ffffff; /* White text */
+}
+
+/* Task Item Pills List */
+.task-items-list {
+  display: flex; /* Flex column list */
+  flex-direction: column; /* Vertical stack */
+  gap: 6px; /* Pill gap */
+  margin-top: 4px; /* Top margin offset */
+}
+
+.task-item-pill {
+  display: flex; /* Horizontal flex container */
+  align-items: center; /* Vertical center alignment */
+  justify-content: space-between; /* Space out item text and remove button */
+  background: rgba(15, 23, 42, 0.5); /* Dark background surface */
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Border line */
+  border-radius: var(--radius-sm); /* Curved corners */
+  padding: 8px 12px; /* Inner padding */
+  font-size: 0.85rem; /* Font size */
+  color: var(--text-primary); /* White text */
+}
+
+.btn-remove-pill {
+  background: transparent; /* Transparent button */
+  border: none; /* No border */
+  color: var(--text-muted); /* Muted cross icon color */
+  font-size: 1.1rem; /* Icon size */
+  cursor: pointer; /* Pointer cursor */
+  line-height: 1; /* Tight line height */
+  padding: 2px 6px; /* Padding */
+  border-radius: var(--radius-sm); /* Curved corners */
+}
+
+.btn-remove-pill:hover {
+  color: var(--text-rose); /* Red color on hover */
+}
+
+/* Modal Action Footer Bar */
+.modal-footer {
+  padding: 16px 24px; /* Footer padding */
+  display: flex; /* Horizontal flex */
+  align-items: center; /* Vertical center */
+  justify-content: flex-end; /* Align buttons to the right */
+  gap: 12px; /* Gap between buttons */
+  border-top: 1px solid var(--border-light); /* Top border line */
+  background: rgba(15, 23, 42, 0.4); /* Dark footer background */
+}
+
+/* ==========================================================================
+   REPORT DETAIL & PRINT VIEW (.detail-document)
+   ========================================================================== */
+.detail-document {
+  display: flex; /* Vertical layout */
+  flex-direction: column; /* Stack document sections */
+  gap: 22px; /* Document section gap */
+}
+
+.detail-header-card {
+  background: rgba(15, 23, 42, 0.6); /* Translucent dark header box */
+  border: 1px solid var(--border-light); /* Border line */
+  border-radius: var(--radius-md); /* Radius corners */
+  padding: 18px 22px; /* Padding */
+  display: flex; /* Flex alignment */
+  justify-content: space-between; /* Space out left meta and right status */
+  align-items: flex-start; /* Align top */
+  gap: 16px; /* Gap */
+}
+
+.detail-section-title {
+  font-size: 0.95rem; /* Section title size */
+  font-weight: 700; /* Bold */
+  color: var(--text-primary); /* Primary text */
+  margin-bottom: 8px; /* Bottom space */
+  display: flex; /* Flex alignment */
+  align-items: center; /* Center icon and title */
+  gap: 8px; /* Icon title gap */
+}
+
+.detail-tasks-list {
+  list-style-type: none; /* Clear default bullet points */
+  display: flex; /* Flex stack */
+  flex-direction: column; /* Stack list items */
+  gap: 8px; /* List item gap */
+}
+
+.detail-task-item {
+  display: flex; /* Horizontal flex row */
+  align-items: flex-start; /* Align top */
+  gap: 10px; /* Bullet gap */
+  font-size: 0.9rem; /* Text size */
+  color: var(--text-primary); /* White text */
+  background: rgba(15, 23, 42, 0.3); /* Light row background */
+  padding: 8px 12px; /* Padding */
+  border-radius: var(--radius-sm); /* Radius */
+}
+
+/* ==========================================================================
+   NOTIFICATION TOAST COMPONENT (.toast-notification)
+   ========================================================================== */
+.toast-container {
+  position: fixed; /* Fixed position */
+  bottom: 24px; /* Bottom offset */
+  right: 24px; /* Right offset */
+  z-index: 2000; /* Super high z-index overlay */
+  display: flex; /* Flex column stack */
+  flex-direction: column; /* Stack notifications */
+  gap: 10px; /* Toast gap */
+}
+
+.toast-notification {
+  background: #1e293b; /* Dark toast background */
+  color: var(--text-primary); /* White text */
+  border-left: 4px solid var(--primary-500); /* Colored indicator accent bar */
+  border-radius: var(--radius-md); /* Radius corners */
+  padding: 14px 20px; /* Padding */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); /* Drop shadow */
+  display: flex; /* Flex alignment */
+  align-items: center; /* Vertical center */
+  gap: 12px; /* Gap between icon and text */
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); /* Slide-up entry animation */
+  min-width: 280px; /* Minimum width */
+}
+
+.toast-notification.success {
+  border-left-color: var(--color-emerald); /* Green indicator */
+}
+
+.toast-notification.error {
+  border-left-color: var(--color-rose); /* Red indicator */
+}
+
+/* Empty State Container */
+.empty-state {
+  text-align: center; /* Center text */
+  padding: 60px 20px; /* Padding */
+  background: var(--surface-card); /* Glass background */
+  border: 1px dashed var(--border-light); /* Dashed border */
+  border-radius: var(--radius-lg); /* Rounded corners */
+  display: flex; /* Flex layout */
+  flex-direction: column; /* Vertical stack */
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  gap: 16px; /* Gap between elements */
+}
+
+.empty-state-icon {
+  font-size: 3rem; /* Large icon size */
+  opacity: 0.6; /* Semi-transparent */
+}
+
+/* Responsive Breakpoints Media Queries */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 16px 12px; /* Reduced container padding for mobile */
+  }
+
+  .app-header {
+    flex-direction: column; /* Stack logo and create button vertically */
+    align-items: stretch; /* Stretch items full width */
+  }
+
+  .filter-toolbar {
+    flex-direction: column; /* Stack search and filters vertically */
+    align-items: stretch; /* Stretch full width */
+  }
+
+  .search-box {
+    width: 100%; /* Search takes full width */
+  }
+
+  .reports-grid {
+    grid-template-columns: 1fr; /* Single column on mobile devices */
+  }
+}

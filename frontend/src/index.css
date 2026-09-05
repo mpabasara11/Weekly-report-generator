@@ -1,0 +1,149 @@
+/* ==========================================================================
+   CSS DESIGN SYSTEM & GLOBAL VARIABLES - WEEKLY REPORT GENERATOR
+   Standard Vanilla CSS with dark mode aesthetics, glassmorphism & CSS tokens
+   ========================================================================== */
+
+/* Root element declaring global CSS custom property variables */
+:root {
+  /* Color Palette - Primary Indigo / Violet Gradient Accents */
+  --primary-hue: 245; /* HSL primary hue value */
+  --primary-50: hsl(var(--primary-hue), 85%, 97%); /* Light accent tint */
+  --primary-100: hsl(var(--primary-hue), 80%, 92%); /* Soft background tint */
+  --primary-500: hsl(var(--primary-hue), 75%, 60%); /* Vibrant brand primary */
+  --primary-600: hsl(var(--primary-hue), 75%, 52%); /* Main action hover state */
+  --primary-700: hsl(var(--primary-hue), 80%, 42%); /* Deep brand shade */
+
+  /* Gradient Palette Definitions */
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%); /* Main body background */
+  --card-gradient: linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.8) 100%); /* Glass card background */
+  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); /* Hero button gradient */
+  --badge-emerald: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.3) 100%); /* Completed state badge */
+  --badge-amber: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(217, 119, 6, 0.3) 100%); /* In progress state badge */
+  --badge-rose: linear-gradient(135deg, rgba(244, 63, 94, 0.2) 0%, rgba(225, 29, 72, 0.3) 100%); /* Blocker alert badge */
+
+  /* Neutral Dark Theme Surface Colors */
+  --surface-dark: #0f172a; /* Deep slate background surface */
+  --surface-card: rgba(30, 41, 59, 0.65); /* Translucent glass card background */
+  --surface-card-hover: rgba(51, 65, 85, 0.75); /* Hover state card surface */
+  --surface-input: rgba(15, 23, 42, 0.6); /* Form input background */
+  --border-light: rgba(255, 255, 255, 0.08); /* Subtle glass card border */
+  --border-highlight: rgba(99, 102, 241, 0.4); /* Input focus active border */
+
+  /* Text Typography Colors */
+  --text-primary: #f8fafc; /* Crisp white header text */
+  --text-secondary: #94a3b8; /* Muted slate body text */
+  --text-muted: #64748b; /* Subtle descriptor text */
+  --text-emerald: #34d399; /* Green status indicator text */
+  --text-amber: #fbbf24; /* Yellow status indicator text */
+  --text-rose: #fb7185; /* Red alert status indicator text */
+
+  /* Status Colors */
+  --color-emerald: #10b981; /* Success metric green */
+  --color-amber: #f59e0b; /* Pending metric yellow */
+  --color-rose: #f43f5e; /* Alert metric red */
+  --color-cyan: #06b6d4; /* Info metric cyan */
+
+  /* Typography Font Families */
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif; /* Display heading font */
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; /* Clean body copy font */
+
+  /* Elevation Shadows & Glassmorphism Properties */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2); /* Small drop shadow */
+  --shadow-md: 0 8px 16px -4px rgba(0, 0, 0, 0.3); /* Medium drop shadow */
+  --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.25); /* Glowing accent glow */
+  --glass-blur: blur(12px); /* Glassmorphism backdrop filter blur strength */
+
+  /* Border Radius Constants */
+  --radius-sm: 8px; /* Small element radius */
+  --radius-md: 12px; /* Standard card radius */
+  --radius-lg: 16px; /* Large container radius */
+  --radius-full: 9999px; /* Pill button fully rounded radius */
+
+  /* Transition Timings */
+  --transition-fast: 0.15s ease; /* Quick hover transition */
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth standard transition */
+}
+
+/* CSS Box-Sizing Reset rule applied across all elements */
+*, *::before, *::after {
+  box-sizing: border-box; /* Include padding and border in element total width/height */
+  margin: 0; /* Clear default browser margins */
+  padding: 0; /* Clear default browser paddings */
+}
+
+/* Base Body Styles */
+body {
+  font-family: var(--font-body); /* Apply standard body typography */
+  background: var(--bg-gradient); /* Apply rich dark gradient background */
+  color: var(--text-primary); /* Default text color */
+  min-height: 100vh; /* Minimum height spans full viewport height */
+  line-height: 1.6; /* Comfortable line spacing for readability */
+  -webkit-font-smoothing: antialiased; /* Crisp font rendering on WebKit browsers */
+  -moz-osx-font-smoothing: grayscale; /* Crisp font rendering on macOS Firefox */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Heading Elements Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading); /* Apply display heading font */
+  color: var(--text-primary); /* Primary crisp white heading color */
+  font-weight: 700; /* Bold heading weight */
+  line-height: 1.25; /* Tight line height for titles */
+}
+
+/* Form Inputs Reset */
+input, textarea, select, button {
+  font-family: inherit; /* Inherit font family from parent */
+  font-size: inherit; /* Inherit font sizing */
+}
+
+/* Custom Scrollbar Stylings */
+::-webkit-scrollbar {
+  width: 8px; /* Width of vertical scrollbar track */
+  height: 8px; /* Height of horizontal scrollbar track */
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.8); /* Dark track background */
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.3); /* Translucent indigo scroll thumb */
+  border-radius: var(--radius-full); /* Round edges */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.6); /* Brighter thumb on hover */
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* Start completely transparent */
+    transform: translateY(6px); /* Slight downward offset */
+  }
+  to {
+    opacity: 1; /* End fully opaque */
+    transform: translateY(0); /* Return to resting position */
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0; /* Start invisible */
+    transform: translateY(20px); /* Start lower */
+  }
+  to {
+    opacity: 1; /* End visible */
+    transform: translateY(0); /* End at resting position */
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.2); /* Low glow intensity */
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.5); /* Peak glow intensity */
+  }
+}

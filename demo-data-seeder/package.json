@@ -1,0 +1,16 @@
+{
+  "name": "weekly-report-demo-seeder",
+  "version": "1.0.0",
+  "description": "Standalone Node.js CLI tool to seed demonstration data into the Weekly Report database",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "seed": "node index.js",
+    "seed:reset": "node index.js --reset"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "mongoose": "^8.3.0"
+  }
+}
