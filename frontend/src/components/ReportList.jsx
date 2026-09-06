@@ -128,7 +128,7 @@ const ReportList = ({ reports, onViewReport, onEditReport, onDeleteReport }) => 
                 style={{ fontSize: '0.82rem', padding: '6px 14px' }}
                 onClick={() => onViewReport(report)}
               >
-                👁️ View Details
+                  👁️ View Details
               </button>
 
               {/* Small icon buttons for edit and delete */}
