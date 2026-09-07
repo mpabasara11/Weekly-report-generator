@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-/**
- * RegisterPage Component
- * @param {Object} props
- * @param {Function} props.onLogin - Callback to pass registered user and token up to App
- */
+
 const RegisterPage = ({ onLogin }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');

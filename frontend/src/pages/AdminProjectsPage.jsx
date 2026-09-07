@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import { authFetch } from '../utils/api';
 
-/**
- * AdminProjectsPage Component rendering project category CRUD administration table and form
- * @returns {JSX.Element} Rendered Projects Admin page JSX
- */
+
+
 const AdminProjectsPage = () => {
   // State storing list of projects
   const [projects, setProjects] = useState([]);

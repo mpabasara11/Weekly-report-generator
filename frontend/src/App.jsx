@@ -36,6 +36,8 @@ function App() {
     setUser(null);
   };
 
+  const homeRoute = user?.role === 'MANAGER' ? '/dashboard' : '/my-reports';
+
   return (
     <Router>
       <div className="app-container">
@@ -46,8 +48,14 @@ function App() {
         <main style={{ width: '100%' }}>
           <Routes>
             {/* Anyone can visit these, no login needed */}
-            <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
-            <Route path="/register" element={<RegisterPage onLogin={handleLogin} />} />
+            <Route
+              path="/login"
+              element={user ? <Navigate to={homeRoute} replace /> : <LoginPage onLogin={handleLogin} />}
+            />
+            <Route
+              path="/register"
+              element={user ? <Navigate to={homeRoute} replace /> : <RegisterPage onLogin={handleLogin} />}
+            />
 
             {/* Must be logged in to see these pages */}
             <Route element={<ProtectedRoute user={user} />}>

@@ -58,7 +58,7 @@ const ManagerReviewPage = () => {
 
     try {
       await authFetch(`/reports/${id}/review`, {
-        method: 'POST',
+        method: 'PATCH',
         body: JSON.stringify({
           status: reviewStatus,
           comment: commentText

@@ -156,9 +156,8 @@ const ReportFormPage = () => {
     setAchievements((prev) => prev.filter((_, i) => i !== index));
   };
 
-  // Submit form handler
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // Save the report as a draft or submit it to the manager.
+  const handleSave = async (status) => {
     if (!projectId) {
       alert('Please select a Project Category');
       return;
@@ -170,6 +169,7 @@ const ReportFormPage = () => {
     const payload = {
       projectId,
       weekStartDate,
+      status,
       tasks: tasks.filter((t) => t.name.trim() !== ''),
       nextWeekPlan,
       blockers,
