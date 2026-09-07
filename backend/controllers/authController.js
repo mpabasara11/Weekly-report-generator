@@ -1,9 +1,6 @@
 // For hashing passwords before saving, and comparing them on login
 const bcrypt = require('bcryptjs');
 
-
-
-
 // For creating and signing JWT tokens
 const jwt = require('jsonwebtoken');
 
@@ -12,14 +9,6 @@ const User = require('../models/User');
 
 // The JWT secret — comes from .env
 const JWT_SECRET = process.env.JWT_SECRET || 'weekly_report_secret_key_2026';
-
-// If MongoDB isn't connected, we store users here in memory instead
-let memoryUsers = [];
-
-// Are we connected to MongoDB right now?
-const isMongoConnected = () => {
-  return User.db && User.db.readyState === 1;
-};
 
 // Creates a signed JWT token for a given user (valid for 7 days)
 const generateToken = (user) => {
@@ -60,76 +49,39 @@ const register = async (req, res) => {
     // Only allow MANAGER or default to TEAM_MEMBER
     const assignedRole = role === 'MANAGER' ? 'MANAGER' : 'TEAM_MEMBER';
 
-    if (isMongoConnected()) {
-      // Make sure this email isn't already taken
-      const existingUser = await User.findOne({ email: normalizedEmail });
-      if (existingUser) {
-        return res.status(400).json({
-          success: false,
-          message: 'User with this email already exists'
-        });
-      }
-
-      // Save the new user to MongoDB
-      const newUser = new User({
-        name,
-        email: normalizedEmail,
-        passwordHash,
-        role: assignedRole
-      });
-
-      const savedUser = await newUser.save();
-
-      // Create a token so they're logged in right away
-      const token = generateToken(savedUser);
-
-      return res.status(201).json({
-        success: true,
-        message: 'User registered successfully',
-        token,
-        user: {
-          id: savedUser._id,
-          name: savedUser.name,
-          email: savedUser.email,
-          role: savedUser.role
-        }
-      });
-    } else {
-      // No MongoDB — use in-memory fallback
-      const existingUser = memoryUsers.find((u) => u.email === normalizedEmail);
-      if (existingUser) {
-        return res.status(400).json({
-          success: false,
-          message: 'User with this email already exists'
-        });
-      }
-
-      // Create the user object in memory
-      const memoryUser = {
-        _id: 'user-' + Date.now(),
-        name,
-        email: normalizedEmail,
-        passwordHash,
-        role: assignedRole,
-        createdAt: new Date().toISOString()
-      };
-
-      memoryUsers.push(memoryUser);
-
-      const token = generateToken(memoryUser);
-
-      return res.status(201).json({
-        success: true,
-        message: 'User registered successfully (In-Memory Fallback)',
-        token,
-        user: {
-          id: memoryUser._id,
-          name: memoryUser.name,
-          email: memoryUser.email,
-          role: memoryUser.role
-        }
+    // Make sure this email isn't already taken
+    const existingUser = await User.findOne({ email: normalizedEmail });
+    if (existingUser) {
+      return res.status(400).json({
+        success: false,
+        message: 'User with this email already exists'
       });
     }
+
+    // Save the new user to MongoDB
+    const newUser = new User({
+      name,
+      email: normalizedEmail,
+      passwordHash,
+      role: assignedRole
+    });
+
+    const savedUser = await newUser.save();
+
+    // Create a token so they're logged in right away
+    const token = generateToken(savedUser);
+
+    return res.status(201).json({
+      success: true,
+      message: 'User registered successfully',
+      token,
+      user: {
+        id: savedUser._id,
+        name: savedUser.name,
+        email: savedUser.email,
+        role: savedUser.role
+      }
+    });
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -155,14 +107,8 @@ const login = async (req, res) => {
 
     const normalizedEmail = email.trim().toLowerCase();
 
-    let user = null;
-
-    // Look up the user — either from MongoDB or in-memory
-    if (isMongoConnected()) {
-      user = await User.findOne({ email: normalizedEmail });
-    } else {
-      user = memoryUsers.find((u) => u.email === normalizedEmail);
-    }
+    // Look up the user from MongoDB
+    const user = await User.findOne({ email: normalizedEmail });
 
     // No user found with that email
     if (!user) {
@@ -227,7 +173,5 @@ const getMe = async (req, res) => {
 module.exports = {
   register,
   login,
-  getMe,
-  memoryUsers
+  getMe
 };
-
