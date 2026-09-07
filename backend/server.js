@@ -36,7 +36,7 @@ app.use(express.json());
 // Also parse regular form submissions
 app.use(express.urlencoded({ extended: true }));
 
-// Try to connect to MongoDB — if it fails, we fall back to in-memory storage
+// Connect to MongoDB — this is required for the app to function
 console.log('Connecting to MongoDB database...');
 mongoose
   .connect(MONGODB_URI, {
@@ -46,18 +46,19 @@ mongoose
     console.log('Successfully connected to MongoDB database!');
   })
   .catch((err) => {
-    console.warn('MongoDB connection notice:', err.message);
-    console.warn('Backend server seamlessly operating in In-Memory Storage Mode for offline previewing!');
+    console.error('MongoDB connection failed:', err.message);
+    console.error('The application requires a working MongoDB connection to function.');
+    process.exit(1); // Exit the process if MongoDB connection fails
   });
 
 
 
-// Quick health check — hit this to see if the server is alive and what database it's using
+// Quick health check — hit this to see if the server is alive
 app.get('/api/health', (req, res) => {
   return res.status(200).json({
     status: 'Online',
     timestamp: new Date().toISOString(),
-    database: mongoose.connection.readyState === 1 ? 'Connected (MongoDB)' : 'In-Memory Fallback Mode'
+    database: mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected'
   });
 });
 
@@ -96,4 +97,3 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Weekly Report Generator backend server running on http://localhost:${PORT}`);
 });
-
