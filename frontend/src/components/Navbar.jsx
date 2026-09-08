@@ -54,6 +54,7 @@ const Navbar = ({ user, onLogout }) => {
           className={({ isActive }) => `btn-secondary ${isActive ? 'active' : ''}`}
           style={{ textDecoration: 'none' }}
         >
+          
           📄 My Reports
         </NavLink>
 

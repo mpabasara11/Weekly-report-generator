@@ -31,10 +31,7 @@ const getStatusClass = (status) => {
   }
 };
 
-/**
- * MyReportsPage Component rendering list of user's personal weekly reports
- * @returns {JSX.Element} Rendered page JSX
- */
+
 const MyReportsPage = () => {
   // State storing reports list array
   const [reports, setReports] = useState([]);

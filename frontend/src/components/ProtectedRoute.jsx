@@ -4,7 +4,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 /**
  * This is basically a bouncer for our pages.
  * It checks if you're logged in, and if the page needs a specific role (like Manager),
- * it checks that too. If you're not allowed in, it sends you somewhere safe.
+ * it checks that too. If you're not allowed in, it sends you somewhere safe.to login obvoiusly
  */
 const ProtectedRoute = ({ user, allowedRoles }) => {
   // Not logged in? Go back to the login page

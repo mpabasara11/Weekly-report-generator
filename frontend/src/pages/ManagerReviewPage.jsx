@@ -14,10 +14,7 @@ const formatDate = (dateVal) => {
   });
 };
 
-/**
- * ManagerReviewPage Component rendering review evaluation workspace and comment submission
- * @returns {JSX.Element} Rendered Review workspace page JSX
- */
+
 const ManagerReviewPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();

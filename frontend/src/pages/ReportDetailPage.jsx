@@ -14,10 +14,7 @@ const formatDate = (dateVal) => {
   });
 };
 
-/**
- * ReportDetailPage Component displaying read-only report view, manager comments, and version snapshots
- * @returns {JSX.Element} Rendered Detail page JSX
- */
+
 const ReportDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();

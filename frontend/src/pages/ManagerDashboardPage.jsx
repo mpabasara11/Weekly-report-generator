@@ -27,10 +27,7 @@ const getStatusClass = (status) => {
   }
 };
 
-/**
- * ManagerDashboardPage Component rendering team analytics, summary cards, and review queues
- * @returns {JSX.Element} Rendered Manager Dashboard page JSX
- */
+
 const ManagerDashboardPage = () => {
   // State storing team reports array
   const [reports, setReports] = useState([]);

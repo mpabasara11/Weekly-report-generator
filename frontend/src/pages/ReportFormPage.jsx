@@ -7,10 +7,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 // Import authFetch utility
 import { authFetch } from '../utils/api';
 
-/**
- * ReportFormPage Component rendering interactive report editor & creation form
- * @returns {JSX.Element} Rendered form page JSX
- */
+
 const ReportFormPage = () => {
   // Extract id parameter from URL route params (if present, mode is EDIT, else CREATE)
   const { id } = useParams();
